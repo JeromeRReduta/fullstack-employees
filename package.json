@@ -8,7 +8,7 @@
     "test": "vitest",
     "test:database": "vitest database",
     "test:server": "vitest server",
-    "db:schema": "psql -d fullstack_employees -f ./db/schema.sql",
+    "db:schema": "psql -U practice -d fullstack_employees -f ./db/schema.sql",
     "db:seed": "node --env-file=.env db/seed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
   },
