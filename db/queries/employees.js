@@ -32,7 +32,6 @@ export async function getEmployee(id) {
             WHERE id=$1`,
     values: [id],
   });
-  console.log("rows is", rows);
   return rows.length > 0 ? rows[0] : undefined; // in the event of multiple matches, returns the first match
 }
 
@@ -59,5 +58,12 @@ export async function updateEmployee({ id, name, birthday, salary }) {
  * @returns undefined if employee with the given id does not exist
  */
 export async function deleteEmployee(id) {
-  // TODO
+  const { rows } = await db.query({
+    text: `DELETE FROM employees
+            WHERE id = $1
+            RETURNING *
+            `,
+    values: [id],
+  });
+  return rows.length > 0 ? rows[0] : undefined;
 }
