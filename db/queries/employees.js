@@ -16,7 +16,10 @@ export async function createEmployee({ name, birthday, salary }) {
 
 /** @returns all employees */
 export async function getEmployees() {
-  // TODO
+  const { rows } = await db.query({
+    text: `SELECT * FROM employees`,
+  });
+  return rows;
 }
 
 /**
@@ -24,7 +27,13 @@ export async function getEmployees() {
  * @returns undefined if employee with the given id does not exist
  */
 export async function getEmployee(id) {
-  // TODO
+  const { rows } = await db.query({
+    text: `SELECT * FROM employees
+            WHERE id=$1`,
+    values: [id],
+  });
+  console.log("rows is", rows);
+  return rows.length > 0 ? rows[0] : undefined; // in the event of multiple matches, returns the first match
 }
 
 /**

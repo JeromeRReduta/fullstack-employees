@@ -8,6 +8,7 @@
     "test": "vitest",
     "test:database": "vitest database",
     "test:server": "vitest server",
+    "test:dbSpecific": "vitest ./__tests__/server.db.test.js",
     "db:schema": "psql -U practice -d fullstack_employees -f ./db/schema.sql",
     "db:seed": "node --env-file=.env db/seed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
@@ -22,7 +23,7 @@
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
     "supertest": "^7.1.0",
-    "vitest": "^3.1.1"
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=22"
