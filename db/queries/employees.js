@@ -41,7 +41,17 @@ export async function getEmployee(id) {
  * @returns undefined if employee with the given id does not exist
  */
 export async function updateEmployee({ id, name, birthday, salary }) {
-  // TODO
+  const { rows } = await db.query({
+    text: `UPDATE employees
+        SET name = $1,
+            birthday = $2,
+            salary = $3
+        WHERE id = $4
+        RETURNING *
+        `,
+    values: [name, birthday, salary, id],
+  });
+  return rows.length > 0 ? rows[0] : undefined;
 }
 
 /**
