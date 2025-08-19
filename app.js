@@ -11,6 +11,10 @@ app.get("/", (req, res) => {
 });
 app.use("/employees", employeeRouter);
 
+app.use((err, req, res, next) => {
+  res.status(err.code || 500).send(err.message ?? "Borken");
+});
+
 // TODO: this file!
 
 export default app;
